@@ -1,0 +1,588 @@
+/* ======================================
+    Snowflake Studios - Killfeed UI
+    Free Edition | v1.0.0
+   0.00ms resmon | No backdrop-filter
+   ====================================== */
+
+:root {
+    /* Global Theme Color (Managed by server) */
+    --main-glow-color: #00F0FC;
+    --main-glow-glow: rgba(0, 240, 252, 0.5);
+    
+    /* Layout Variables (Managed by server) */
+    --kf-top: 50vh;
+    --kf-right: 0.8vw;
+    --kf-radius: 0px;
+    
+    /* Dynamic Color Variables (Updated via NUI) */
+    --killer-color: var(--main-glow-color);
+    --victim-color: #FF1493;
+    --weapon-color: #FFFFFF;
+    --background-color: #0F0F14;
+    --background-rgba: rgba(15, 15, 20, 0.75);
+    
+    /* Computed Shadow Colors */
+    --killer-glow: rgba(0, 240, 252, 0.5);
+    --victim-glow: rgba(255, 20, 147, 0.5);
+    
+    /* Static Design Tokens */
+    --clr-text-primary: #FFFFFF;
+    --clr-text-secondary: rgba(255, 255, 255, 0.85);
+    --clr-border-accent: rgba(255, 255, 255, 0.15);
+    
+    /* Typography */
+    --font-primary: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Spacing & Sizing */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+    --radius-md: 4px;
+    
+    /* Animation */
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ====================================== 
+   Global Reset
+   ====================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background: transparent !important;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--clr-text-primary);
+}
+
+/* ====================================== 
+    Killfeed Container
+   Uses CSS variables for dynamic positioning
+   ====================================== */
+
+.killfeed-container {
+    position: fixed;
+    top: var(--kf-top);
+    right: var(--kf-right);
+    transform: translateY(-50%);
+    width: auto;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ====================================== 
+    Killfeed Entry - Premium Card Style
+   No backdrop-filter for FiveM stability
+   Uses CSS variables for dynamic border-radius
+   ====================================== */
+
+.killfeed-entry {
+    position: relative;
+    width: fit-content;
+    min-width: 0;
+    max-width: 550px;
+    height: 52px;
+    padding: 0 18px;
+    
+    /* Solid semi-transparent background (NO blur/backdrop-filter) */
+    background: var(--background-rgba);
+    
+    /* Dynamic border from theme color */
+    border: 1px solid var(--main-glow-color);
+    border-radius: var(--kf-radius);
+    
+    /* Typography */
+    color: var(--clr-text-primary);
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 700;
+    
+    /* Subtle glow effect */
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 20px var(--main-glow-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow: hidden;
+    
+    /* Smooth transitions */
+    transition: all var(--transition-base);
+}
+
+/* ====================================== 
+   Slide-in Animation (Matching sf_killfeed)
+   ====================================== */
+
+.killfeed-entry.animate-in {
+    animation: slideInFeed 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInFeed {
+    0% {
+        opacity: 0;
+        transform: translateX(100px) scale(0.9);
+    }
+    60% {
+        transform: translateX(-10px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* ====================================== 
+   Fade-out Animation (Matching sf_killfeed)
+   ====================================== */
+
+.killfeed-entry.fade-out {
+    animation: fadeOutFeed 0.5s ease-out forwards;
+}
+
+@keyframes fadeOutFeed {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(50px) scale(0.95);
+    }
+}
+
+/* ====================================== 
+   Killer Name (Dynamic Color)
+   ====================================== */
+
+.killfeed-killer {
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--killer-color);
+    text-shadow: 
+        1px 1px 3px rgba(0, 0, 0, 0.9),
+        0 0 12px var(--killer-glow);
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+/* ====================================== 
+   Weapon Icon (Crosshair SVG)
+   ====================================== */
+
+.killfeed-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.killfeed-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--weapon-color);
+    fill: currentColor;
+    filter: drop-shadow(0 0 6px var(--main-glow-glow));
+    opacity: 0.9;
+}
+
+/* ====================================== 
+   Weapon Label (Dynamic Color)
+   ====================================== */
+
+.killfeed-weapon {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--weapon-color);
+    opacity: 0.85;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+/* ====================================== 
+   Victim Name (Dynamic Color)
+   ====================================== */
+
+.killfeed-victim {
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--victim-color);
+    text-shadow: 
+        1px 1px 3px rgba(0, 0, 0, 0.9),
+        0 0 12px var(--victim-glow);
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+}
+
+/* ====================================== 
+   Soft Pulse on Entry (Premium Touch)
+   ====================================== */
+
+.killfeed-entry.animate-in {
+    animation: 
+        slideInFeed 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+        softPulse 2s ease-in-out 0.4s;
+}
+
+@keyframes softPulse {
+    0%, 100% {
+        box-shadow: 
+            0 4px 16px rgba(0, 0, 0, 0.4),
+            0 0 20px var(--main-glow-glow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    50% {
+        box-shadow: 
+            0 4px 20px rgba(0, 0, 0, 0.5),
+            0 0 30px var(--main-glow-glow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+}
+
+/* Ensure fade-out overrides animate-in/softPulse */
+.killfeed-entry.animate-in.fade-out {
+    animation: fadeOutFeed 0.5s ease-out forwards;
+}
+
+/* ====================================== 
+   Entry Limit (Performance)
+   ====================================== */
+
+.killfeed-container > .killfeed-entry:nth-child(n+8) {
+    display: none;
+}
+
+/* ====================================== 
+   Responsive Scaling
+   ====================================== */
+
+@media screen and (max-width: 1280px) {
+    .killfeed-container {
+        right: 15px;
+        max-width: 450px;
+    }
+    
+    .killfeed-entry {
+        min-width: 0;
+        height: 46px;
+        padding: 0 14px;
+        font-size: 14px;
+    }
+    
+    .killfeed-killer,
+    .killfeed-victim {
+        font-size: 15px;
+    }
+    
+    .killfeed-weapon {
+        font-size: 12px;
+    }
+    
+    .killfeed-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* ======================================
+   Settings Panel - Premium Admin UI
+   ====================================== */
+
+.settings-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: linear-gradient(135deg, rgba(8, 8, 12, 0.98) 0%, rgba(12, 12, 18, 0.98) 100%);
+    border: 1px solid var(--main-glow-color);
+    border-radius: 12px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.8),
+        0 0 60px rgba(0, 240, 252, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    z-index: 10000;
+    overflow: hidden;
+    font-family: var(--font-primary);
+}
+
+.settings-panel.hidden {
+    display: none;
+}
+
+/* Header */
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.settings-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--main-glow-color);
+    text-shadow: 0 0 12px rgba(0, 240, 252, 0.5);
+    letter-spacing: 0.5px;
+}
+
+.close-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: rgba(255, 50, 50, 0.2);
+    border-color: rgba(255, 50, 50, 0.4);
+    color: #ff5050;
+}
+
+/* Body */
+.settings-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.setting-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Color Input Row */
+.color-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.color-input-row input[type="color"] {
+    width: 48px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.color-input-row input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-input-row input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+}
+
+.color-input-row input[type="text"] {
+    flex: 1;
+    height: 40px;
+    padding: 0 14px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.color-input-row input[type="text"]:focus {
+    outline: none;
+    border-color: var(--main-glow-color);
+    box-shadow: 0 0 12px rgba(0, 240, 252, 0.3);
+}
+
+/* Slider Row */
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.slider-row input[type="range"] {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.slider-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--main-glow-color);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 240, 252, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slider-row input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 16px rgba(0, 240, 252, 0.7);
+}
+
+.slider-row span {
+    min-width: 50px;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--main-glow-color);
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+/* Editable Slider Input */
+.slider-input {
+    width: 60px;
+    height: 32px;
+    padding: 0 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: var(--main-glow-color);
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+.slider-input::-webkit-outer-spin-button,
+.slider-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.slider-input:focus {
+    outline: none;
+    border-color: var(--main-glow-color);
+    box-shadow: 0 0 10px rgba(0, 240, 252, 0.25);
+}
+
+/* Slider Unit Label */
+.slider-unit {
+    min-width: 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+/* Preview Button */
+.btn-preview {
+    width: 100%;
+    height: 44px;
+    background: rgba(0, 240, 252, 0.1);
+    border: 1px solid rgba(0, 240, 252, 0.4);
+    color: var(--main-glow-color);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.btn-preview:hover {
+    background: rgba(0, 240, 252, 0.2);
+    border-color: rgba(0, 240, 252, 0.6);
+    box-shadow: 0 0 16px rgba(0, 240, 252, 0.3);
+}
+
+/* Footer */
+.settings-footer {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn {
+    flex: 1;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-reset {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-reset:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, rgba(0, 240, 252, 0.9) 0%, rgba(0, 200, 220, 0.9) 100%);
+    color: #0a0a0f;
+    box-shadow: 0 4px 16px rgba(0, 240, 252, 0.3);
+}
+
+.btn-save:hover {
+    background: linear-gradient(135deg, rgba(0, 240, 252, 1) 0%, rgba(0, 200, 220, 1) 100%);
+    box-shadow: 0 4px 24px rgba(0, 240, 252, 0.5);
+    transform: translateY(-1px);
+}
