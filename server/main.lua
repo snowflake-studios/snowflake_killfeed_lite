@@ -1,6 +1,6 @@
 -- =============================================
 -- Snowflake Studios - Killfeed Server (Lite)
--- Free Edition | v1.0.1
+-- Free Edition | v1.0.2
 -- =============================================
 
 local ResourceName = GetCurrentResourceName()
@@ -442,7 +442,6 @@ end)
 -- Admin Commands (ACE Restricted)
 -- Add to permissions.cfg:
 --   add_ace group.admin command.killfeedtest allow
---   add_ace group.admin command.testkill allow
 -- =============================================
 
 RegisterCommand('killfeedtest', function(source, args)
@@ -454,54 +453,10 @@ RegisterCommand('killfeedtest', function(source, args)
     TriggerClientEvent(('%s:runTest'):format(EventPrefix), source, count)
 end, true)
 
-RegisterCommand('testkill', function(source)
-    if not source or source == 0 then return end
-
-    local mockKillers = {
-        'Ghost',
-        'Viper',
-        'Soap',
-        'Reaper',
-        'Specter',
-        'Nova',
-        'Rogue'
-    }
-
-    local mockVictims = {
-        'Cipher',
-        'Blaze',
-        'Fang',
-        'Onyx',
-        'Wraith',
-        'Echo',
-        'Havoc'
-    }
-
-    local mockWeapons = {
-        'Carbine Rifle',
-        'Combat PDW',
-        'Heavy Sniper',
-        'Knife'
-    }
-
-    local function pickRandom(list)
-        return list[math.random(1, #list)]
-    end
-
-    for i = 1, 5 do
-        SetTimeout((i - 1) * 800, function()
-            local killerName = pickRandom(mockKillers)
-            local victimName = pickRandom(mockVictims)
-            local weaponLabel = pickRandom(mockWeapons)
-            broadcastKill(killerName, victimName, weaponLabel)
-        end)
-    end
-end, true)
-
 -- =============================================
 -- Startup Message
 -- =============================================
 CreateThread(function()
-    print('^2[Snowflake Studios]^0 Killfeed Lite v1.0.1 loaded successfully')
-    debugPrint('^3[Snowflake Studios]^0 Commands: /killfeedtest, /testkill')
+    print('^2[Snowflake Studios]^0 Killfeed Lite v1.0.2 loaded successfully')
+    debugPrint('^3[Snowflake Studios]^0 Commands: /killfeedtest')
 end)

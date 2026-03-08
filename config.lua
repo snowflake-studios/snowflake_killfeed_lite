@@ -2,7 +2,7 @@ Config = Config or {}
 
 -- =============================================
 -- Snowflake Studios - Killfeed Lite Configuration
--- Free Edition | v1.0.1
+-- Free Edition | v1.0.2
 -- =============================================
 
 Config.DedupWindowMs = 250
