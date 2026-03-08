@@ -1,6 +1,6 @@
 -- =============================================
 -- Snowflake Studios - Killfeed Client (Lite)
--- Free Edition | v1.0.1
+-- Free Edition | v1.0.2
 -- =============================================
 
 local ResourceName = GetCurrentResourceName()
@@ -67,13 +67,13 @@ RegisterNetEvent(('%s:runTest'):format(EventPrefix), function(numMessages)
     count = math.min(math.max(count, 1), 7)
 
     local testMessages = {
-        {killer = "Vesper Hale", victim = "Orion Knox", weapon = "Carbine Rifle"},
-        {killer = "Nyx Calder", victim = "Juno Vale", weapon = "Combat Pistol"},
-        {killer = "Rook Mercer", victim = "Mara Voss", weapon = "Heavy Sniper"},
-        {killer = "Atlas Kade", victim = "Iris Quill", weapon = "Knife"},
-        {killer = "Nova Pierce", victim = "Cai Rune", weapon = "SMG"},
-        {killer = "Silas Crowe", victim = "Elara Finch", weapon = "Assault Rifle"},
-        {killer = "Lyra Wren", victim = "Dax Rowan", weapon = "Shotgun"}
+        {killer = "Ghost", victim = "Cipher", weapon = "Carbine Rifle"},
+        {killer = "Viper", victim = "Blaze", weapon = "Combat PDW"},
+        {killer = "Soap", victim = "Fang", weapon = "Heavy Sniper"},
+        {killer = "Reaper", victim = "Onyx", weapon = "Knife"},
+        {killer = "Specter", victim = "Wraith", weapon = "SMG"},
+        {killer = "Nova", victim = "Echo", weapon = "Assault Rifle"},
+        {killer = "Rogue", victim = "Havoc", weapon = "Shotgun"}
     }
 
     for i = 1, count do
@@ -152,5 +152,4 @@ CreateThread(function()
     TriggerEvent('chat:addSuggestion', '/killfeedtest', 'Snowflake Studios: Test the killfeed UI (Admin Only)', {
         {name = 'count', help = 'Number of test messages (1-7)'}
     })
-    TriggerEvent('chat:addSuggestion', '/testkill', 'Snowflake Studios: Showcase 5 random kills (Admin Only)', {})
 end)

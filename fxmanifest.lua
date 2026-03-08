@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Snowflake Studios'
 description 'Snowflake Killfeed Lite - Free Edition'
-version '1.0.1'
+version '1.0.2'
 
 -- Dependencies
 dependencies {
@@ -31,11 +31,4 @@ client_scripts {
 
 server_scripts {
     'server/main.lua'
-}
-
-escrow_ignore {
-    'config.lua',
-    'client/*.lua',
-    'server/*.lua',
-    'html/*'
 }

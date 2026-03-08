@@ -1,59 +1,199 @@
-# Snowflake Studios - Killfeed Lite
+<div align="center">
 
-> **Version 1.0.1** | Free Edition | Unencrypted Source
+# ❄️ Snowflake Killfeed Lite
+
+### Free Edition — Open Source & Unencrypted
+
+[![Version](https://img.shields.io/badge/version-1.0.2-blue?style=for-the-badge)](https://github.com/snowflake-studios/snowflake_killfeed_lite)
+[![FiveM](https://img.shields.io/badge/FiveM-Ready-brightgreen?style=for-the-badge)](https://fivem.net/)
+[![Performance](https://img.shields.io/badge/resmon-0.00ms-00F0FC?style=for-the-badge)](#)
+[![License](https://img.shields.io/badge/license-free_to_use-green?style=for-the-badge)](#-license)
+
+**A lightweight, event-driven killfeed notification system for FiveM.**
+Zero loops. Zero idle overhead. Plug and play.
 
 ---
 
-A lightweight, high-performance killfeed notification system for FiveM servers keying in on performance and flexibility. This is the free, unencrypted edition of the Snowflake Killfeed suite, designed to be completely standalone while offering deep integration if you need it.
+[Installation](#-installation) •
+[Configuration](#%EF%B8%8F-configuration) •
+[Lite vs Premium](#-lite-vs-premium-comparison) •
+[Upgrade to Premium](#-upgrade-to-premium)
 
-## ✨ Core Selling Points
+</div>
 
-- **⚡ 0.00ms Idle:** Fully event-driven architecture using `baseevents`. Zero resource consumption when inactive.
-- **🔧 Standalone Ready:** Works on **any** server.
-  - *Framework Support:* Auto-detects `qbx_core`, `qb-core`, or `es_extended` to fetch character names.
-  - *Standalone:* Defaults to Steam/FiveM display names if no framework is present.
-- **🔓 Unencrypted & Open:** Full source code access for maximum customization.
-- **🎮 Steam Persona Support:** Built-in SteamID64 conversion to fetch and cache authentic Steam profile names (requires API Key).
-- **🛡️ Safe & Stable:**
-  - XSS-safe text rendering.
-  - FiveM CEF-safe UI (no `backdrop-filter` crashes).
-  - Smart deduplication to prevent kill spam.
+---
+
+## ✨ What's Included (Free)
+
+- **⚡ 0.00ms Idle** — Fully event-driven via `baseevents`. Zero resource consumption when nobody is dying.
+- **🔧 Standalone Ready** — Works on **any** server. Auto-detects Qbox, QB-Core, and ESX for character names. Falls back to Steam/FiveM names if no framework is present.
+- **🔓 Unencrypted & Open** — Full source code access for maximum customization.
+- **🎮 Steam Persona Names** — Built-in SteamID64 conversion to fetch and cache authentic Steam names (requires API key).
+- **🛡️ Safe & Stable** — XSS-safe text rendering, FiveM CEF-safe UI (no `backdrop-filter` crashes), and smart deduplication to prevent kill spam.
+- **📤 Export API** — Trigger kill messages from your own resources (robberies, drug wars, etc.) with resource whitelisting.
+- **🧪 Test Command** — `/killfeedtest` for instant in-game testing (ACE-protected).
+
+---
+
+## 🔥 Lite vs Premium Comparison
+
+Killfeed Lite is a solid foundation — but if you want the features that make your server **stand out**, the Premium version is a different class entirely.
+
+| Feature | Lite (Free) | Premium |
+|:--------|:-----------:|:-------:|
+| 0.00ms Event-Driven Architecture | ✅ | ✅ |
+| Framework Auto-Detect (Qbox / QB-Core / ESX) | ✅ | ✅ |
+| Steam Persona Name Support | ✅ | ✅ |
+| Kill Deduplication | ✅ | ✅ |
+| Export API for Custom Kill Messages | ✅ | ✅ |
+| XSS-Safe Rendering | ✅ | ✅ |
+| Configurable Colors & Layout | ✅ | ✅ |
+| Test Command (`/killfeedtest`) | ✅ | ✅ |
+| **Weapon Icon Images (104+ .webp + custom)** | ❌ Generic icon | ✅ Per-weapon art |
+| **Headshot Detection** | ❌ | ✅ Early bone capture |
+| **Kill Distance Tracking** | ❌ | ✅ Server-side authoritative |
+| **Steam Profile Pictures in Feed** | ❌ | ✅ Killer + Victim avatars |
+| **Discord Webhook Kill Logging** | ❌ | ✅ Rich embeds w/ thumbnails |
+| **Discord Webhook Filters** | ❌ | ✅ Distance / Headshot / PvP |
+| **In-Game Admin Settings Panel** (`/killfeedmenu`) | ❌ | ✅ Live color + layout editor |
+| **Redzone / PVP Zone Support** | ❌ | ✅ Config, blockwars, exports |
+| **Ped Kill Showcase Mode** | ❌ | ✅ Simulated names/avatars |
+| **Persistent Theme System** (`theme.json`) | ❌ | ✅ Survives restarts |
+| **Live Theme Sync to All Players** | ❌ | ✅ Instant broadcast |
+| **Batched Steam Avatar Prefetch** | ❌ | ✅ 100 IDs/request |
+| **Notable Kill Badges (Discord)** | ❌ | ✅ Long-range highlights |
+| **Enriched Kill Pipeline** | ❌ | ✅ Reliable at all ranges |
+| **Admin Commands** | 1 | 3 |
+| **Tebex Escrow Protection** | N/A | ✅ Available |
+| **Price** | Free | [From $14.99](https://snowflake-studios.tebex.io/) |
+
+---
+
+## 🚀 What You're Missing
+
+### 🔫 104+ Weapon Icon Images + Custom Additions
+The Premium killfeed renders **actual weapon artwork** inline — every weapon in GTA V has a hand-crafted `.webp` icon that appears in the kill notification. You can even drag-and-drop your own `.webp` icons for modded weapons. Lite shows the same generic crosshair SVG for every kill.
+
+### 🛑 Redzone Arena Restrictions
+Premium lets you restrict killfeed visibility ONLY to players who are actively standing inside designated PVP zones. Syncs effortlessly using hardcoded coordinates, external exports, or out-of-the-box native support for `sf_blockwars`. **Lite shows the killfeed globally to everyone.**
+
+### 🎥 Ped Kill Showcase Mode
+Perfect for creating promotional footage on solo test servers. Premium lets you simulate highly-realistic "player vs player" killfeed notifications when shooting standard NPC peds, utilizing randomized gamer-style names and rotating Xbox-style avatars. **Lite just says 'Ped'.**
+
+### 🎯 Headshot Detection
+Premium uses **early bone capture** (bone 31086 / SKEL_Head) during the `CEventNetworkEntityDamage` event — before ragdoll or LOD can clear the data — giving you reliable headshot detection even at extreme range. A red crosshair icon marks headshot kills in the feed. **Lite has no headshot detection.**
+
+### 📏 Kill Distance Tracking
+Every kill in Premium calculates distance **server-side** using authoritative `GetEntityCoords` — no client streaming inaccuracies. Kills above a configurable threshold (default 50m) display the distance right in the notification. **Lite does not track distance.**
+
+### 👤 Steam Profile Pictures
+Premium renders **circular Steam profile pictures** for both killer and victim in the killfeed — with color-coded borders (cyan for killer, magenta for victim) and matching glow effects. Avatars are batched-prefetched on startup (100 IDs per Steam API call) and cached per-player on join, so they're ready before the first kill. **Lite has no avatar support.**
+
+### 📨 Discord Webhook Kill Logging
+Every kill can be logged to Discord as a **rich embed** with weapon, distance, headshot status, Steam avatar thumbnails, and color-coded styling (red for headshots, cyan otherwise). Configure **AND-gated filters** to only log what matters: minimum distance, headshot-only, or PvP-only. Lite has **zero Discord integration**.
+
+<div style="background-color: #2b2d31; border-radius: 4px; border-left: 4px solid #ed4245; padding: 16px; color: #dbdee1; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 520px; line-height: 1.5;">
+  <div style="margin-bottom: 12px; font-size: 0.9em;">
+    <b style="color: #ffffff;">☠️ Kill Confirmed</b> 
+    <span style="float: right; border-radius: 4px; background: #1e1f22; padding: 2px 6px;">[Avatar]</span>
+  </div>
+  
+  <div style="font-size: 1.25em; color: #ffffff; font-weight: bold; margin-bottom: 12px;">
+    Soap ➜ Fang
+  </div>
+
+  <div style="border-left: 4px solid #4f545c; padding-left: 10px; margin-bottom: 16px; color: #a3a6aa;">
+    💀 <b>HEADSHOT</b>
+  </div>
+
+  <div style="margin-bottom: 16px;">
+    <div style="display: inline-block; width: 35%; vertical-align: top;">
+      <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">🔫 Weapon</div>
+      <span style="background-color: #1e1f22; padding: 4px 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">Heavy Sniper</span>
+    </div>
+    <div style="display: inline-block; width: 30%; vertical-align: top;">
+      <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">📏 Distance</div>
+      <span style="background-color: #1e1f22; padding: 4px 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">210m</span>
+    </div>
+    <div style="display: inline-block; width: 30%; vertical-align: top;">
+      <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">🎯 Headshot</div>
+      <span style="background-color: #1e1f22; padding: 4px 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">✓ Yes</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">🏆 Notable</div>
+    <div style="background-color: #1e1f22; padding: 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">
+      Long Range Kill — 210m
+    </div>
+  </div>
+
+  <div style="font-size: 0.75em; color: #949ba4; font-weight: 500;">
+    ❄️ Snowflake Killfeed • Snowflake Studios • 3/5/2026 9:20 PM
+  </div>
+</div>
+
+### 🎨 In-Game Admin Settings Panel
+Type `/killfeedmenu` to open a full NUI settings panel — change killer/victim/theme/background colors with live color pickers, adjust vertical/horizontal position with sliders, tweak border radius, and preview changes in real-time. Saved to `theme.json` and synced to all connected players instantly. **Lite requires manual config.lua edits and a resource restart.**
+
+### 🔁 Live Theme Sync
+Change the theme once via the admin panel and every connected player sees the update **immediately** — no restart, no refresh. Theme persists across server restarts via `theme.json`.
+
+---
+
+## 🛒 Upgrade to Premium
+
+<div align="center">
+
+**Ready to give your players the killfeed they deserve?**
+
+| Package | Price | What You Get |
+|:--------|:-----:|:-------------|
+| **Escrowed** | $14.99 | Full premium features, core code protected via Tebex escrow |
+| **Open Source** | $34.99 | Full premium features + complete unencrypted source code |
+
+### **[🛒 Browse Packages on Snowflake Studios](https://snowflake-studios.tebex.io/)**
+
+[![Discord](https://img.shields.io/badge/Discord-Join_Community-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/mte6qwW98W)
+
+</div>
+
+---
 
 ## 📋 Requirements
 
-Ensure these resources are started before the killfeed:
+| Dependency | Required | Notes |
+|---|---|---|
+| **[ox_lib](https://github.com/overextended/ox_lib)** | ✅ Yes | Core utility library |
+| **[baseevents](https://github.com/citizenfx/fivem-data)** | ✅ Yes | Kill detection (included with FiveM) |
+| **[qbx_core](https://github.com/Qbox-project/qbx_core)** | ❌ Optional | Auto-detected for character names |
+| **[qb-core](https://github.com/qbcore-framework/qb-core)** | ❌ Optional | Auto-detected for character names |
+| **[es_extended](https://github.com/esx-framework/esx_core)** | ❌ Optional | Auto-detected for character names |
 
-- **[ox_lib](https://github.com/overextended/ox_lib)** (Required)
-- **[baseevents](https://github.com/citizenfx/fivem-data)** (Required - Standard FiveM Resource)
-- **[qbx_core](https://github.com/Qbox-project/qbx_core)** (Optional - Auto-detected)
-- **[qb-core](https://github.com/qbcore-framework/qb-core)** (Optional - Auto-detected)
-- **[es_extended](https://github.com/esx-framework/esx_core)** (Optional - Auto-detected)
+---
 
 ## 🚀 Installation
 
-1.  **Download & Extract**
-    - Place the `snowflake_killfeed_lite` folder into your server's `resources` directory.
+1. Place `snowflake_killfeed_lite` in your server's `resources` directory.
+2. Add to `server.cfg` (after dependencies):
+   ```cfg
+   ensure ox_lib
+   ensure baseevents
+   ensure snowflake_killfeed_lite
+   ```
+3. Add ACE permissions to `permissions.cfg`:
+   ```cfg
+   add_ace group.admin command.killfeedtest allow
+   ```
+4. Restart your server.
 
-2.  **Server Configuration**
-    - Add the resource to your `server.cfg`. Ensure it starts *after* dependencies.
-    ```cfg
-    ensure ox_lib
-    ensure baseevents
-    ensure qbx_core # If using Qbox
-    ensure qb-core # If using QB-Core
-    ensure es_extended # If using ESX
-    ensure snowflake_killfeed_lite
-    ```
-
-3.  **Restart Server**
-    - Restart your server to load the resource.
+---
 
 ## ⚙️ Configuration
 
-All settings are managed in `config.lua`.
+All settings are in `config.lua`.
 
-### 1. Visual Customization
-Adjust colors and layout to match your server's UI theme.
+### Colors & Layout
 ```lua
 Config.Colors = {
     killer = '#00F0FC',      -- Killer name (Cyan)
@@ -65,80 +205,112 @@ Config.Colors = {
 Config.Layout = {
     posX = 0.8,              -- Horizontal position (0.8vw from right)
     posY = 50,               -- Vertical position (50vh center)
-    borderRadius = 0         -- Corner roundness
+    borderRadius = 0         -- Corner roundness (px)
 }
 ```
 
-### 2. Name Display Mode
-Choose how player names are displayed in the feed.
+> 💡 **Premium Tip:** The Premium version lets you change all of this in-game via `/killfeedmenu` with real-time preview — no config edits or restarts needed.
 
-- **Option A: Character Names (Default)**
-  - Set `Config.NameMode = 'character'`
-  - Automatically pulls character names when `qbx_core`, `qb-core`, or `es_extended` is running.
+### Name Display Mode
 
-- **Option B: Steam Persona Names**
-  - Set `Config.NameMode = 'steam'`
-  - **Required:** You must provide a valid Steam Web API Key.
-  - Get a key here: [https://steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey)
-  - Paste the key into `Config.SteamApiKey` in `config.lua`:
-    ```lua
-    Config.SteamApiKey = 'YOUR_STEAM_WEB_API_KEY_HERE'
-    ```
-
-### 3. Testing Mode
-If you are developing alone or need to test triggers without another player, enable the Ped Kill Test.
-- When enabled, killing any NPC/Guard/Ped (on foot or in a vehicle) will trigger a killfeed notification.
-- **Note:** Disable this for production servers to avoid spam from random ped deaths.
+**Character Names (Default):**
 ```lua
-Config.EnablePedKillTest = true -- Set to false for production
+Config.NameMode = 'character'
 ```
+Auto-pulls character names from Qbox, QB-Core, or ESX.
 
-## 💻 Usage
-
-### Admin Commands
-Commands are protected by ACE permissions. Add these to your `permissions.cfg`:
-
-```cfg
-add_ace group.admin command.killfeedtest allow
-add_ace group.admin command.testkill allow
+**Steam Persona Names:**
+```lua
+Config.NameMode = 'steam'
+Config.SteamApiKey = 'YOUR_STEAM_WEB_API_KEY_HERE'
 ```
+Get a key at [steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey).
+
+> 💡 **Premium Tip:** The Premium version also displays **Steam profile pictures** alongside names in the killfeed when using Steam mode.
+
+### Testing Mode
+```lua
+Config.EnablePedKillTest = false  -- Set true for dev/solo testing
+```
+When enabled, killing any NPC triggers a killfeed entry. Disable for production.
+
+---
+
+## 💻 Admin Commands
 
 | Command | Usage | Description |
-| :--- | :--- | :--- |
-| `/killfeedtest` | `/killfeedtest [1-7]` | Spawns a specific number of test entries. |
-| `/testkill` | `/testkill` | Simulates a live scenario with 5 random kills. |
+|:--------|:------|:------------|
+| `/killfeedtest` | `/killfeedtest [1-7]` | Spawn test killfeed entries |
 
-### Developer Exports
-Trigger the killfeed from your own scripts (e.g., robberies, drug wars).
+> 💡 **Premium adds:** `/killfeedmenu` (live settings panel) and `/killfeedreset` (reset theme to defaults).
 
-**1. Whitelist Your Resource:**
-Add your resource name to the allowed list in `config.lua`:
+---
+
+## 🔧 Developer Exports
+
+Trigger the killfeed from your own resources:
+
+**1. Whitelist your resource in `config.lua`:**
 ```lua
 Config.AllowedExportResources['my_robbery_script'] = true
 ```
 
-**2. Call the Export:**
+**2. Call the export:**
 ```lua
--- Format: killerName, victimName, weaponLabel
+-- With names:
 exports.snowflake_killfeed_lite:AddKill('Officer John', 'Criminal Mike', 'Combat Pistol')
 
--- You can also pass Server IDs (auto-resolves names):
+-- With server IDs (auto-resolves names):
 exports.snowflake_killfeed_lite:AddKill(source, targetId, 'Knife')
 ```
 
+> 💡 **Premium Tip:** The Premium export also accepts `isHeadshot` and `distance` parameters, auto-resolves Steam avatars for both players, and logs the kill to Discord.
+
+---
+
+## 📁 File Structure
+
+```
+snowflake_killfeed_lite/
+├── fxmanifest.lua          -- Resource manifest
+├── config.lua              -- All user-configurable settings
+├── LICENSE.md
+├── README.md
+├── client/
+│   └── main.lua            -- Kill detection, NUI bridge, ped kill test
+├── server/
+│   └── main.lua            -- Kill processing, name resolution, broadcasts
+└── html/
+    ├── index.html           -- NUI entry point
+    ├── style.css            -- Killfeed card styles
+    └── script.js            -- NUI logic (vanilla JS)
+```
+
+---
+
 ## 🆘 Support
 
-Need help or want to check out the Premium version?
+- **Store:** [snowflake-studios.tebex.io](https://snowflake-studios.tebex.io/)
+- **Discord:** [discord.gg/mte6qwW98W](https://discord.gg/mte6qwW98W)
+- **Email:** support@snowflake-studios.xyz
 
-**Official Store:** [Snowflake Studios](https://snowflake-studios.tebex.io/)
-
-For technical support and community access, please visit our official website to find the current Discord invitation link.
+---
 
 ## 📄 License
 
-**Snowflake Killfeed Lite** is free software. You are free to edit, modify, and use this script on your server.
-*Re-selling or re-distributing this script as a paid standalone package is prohibited.*
+**Snowflake Killfeed Lite** is free to use and modify on your server. Re-selling or redistributing as a paid package is prohibited. See [LICENSE.md](LICENSE.md) for full terms.
 
 ---
-**© 2026 Snowflake Studios - All Rights Reserved**
+
+<div align="center">
+
+### Enjoying Killfeed Lite? You'll love the Premium.
+
+**[🛒 Get Snowflake Killfeed Premium →](https://snowflake-studios.tebex.io/)**
+
+---
+
+**© 2026 Snowflake Studios — All Rights Reserved**
+
+</div>
 
