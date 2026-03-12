@@ -35,6 +35,14 @@ Zero loops. Zero idle overhead. Plug and play.
 
 ---
 
+## 🌟 Killfeed Premium Showcase
+
+See the Premium version in action! Headshots, Steam avatars, actual weapon artwork, and advanced distance tracking:
+
+[![Killfeed Premium Showcase](https://img.youtube.com/vi/JMhNe24ayE8/maxresdefault.jpg)](https://youtu.be/JMhNe24ayE8)
+
+---
+
 ## 🔥 Lite vs Premium Comparison
 
 Killfeed Lite is a solid foundation — but if you want the features that make your server **stand out**, the Premium version is a different class entirely.
