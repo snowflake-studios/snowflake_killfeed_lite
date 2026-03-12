@@ -100,46 +100,7 @@ Premium renders **circular Steam profile pictures** for both killer and victim i
 ### 📨 Discord Webhook Kill Logging
 Every kill can be logged to Discord as a **rich embed** with weapon, distance, headshot status, Steam avatar thumbnails, and color-coded styling (red for headshots, cyan otherwise). Configure **AND-gated filters** to only log what matters: minimum distance, headshot-only, or PvP-only. Lite has **zero Discord integration**.
 
-<div style="background-color: #2b2d31; border-radius: 4px; border-left: 4px solid #ed4245; padding: 16px; color: #dbdee1; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 520px; line-height: 1.5;">
-  <div style="margin-bottom: 12px; font-size: 0.9em;">
-    <b style="color: #ffffff;">☠️ Kill Confirmed</b> 
-    <span style="float: right; border-radius: 4px; background: #1e1f22; padding: 2px 6px;">[Avatar]</span>
-  </div>
-  
-  <div style="font-size: 1.25em; color: #ffffff; font-weight: bold; margin-bottom: 12px;">
-    Soap ➜ Fang
-  </div>
-
-  <div style="border-left: 4px solid #4f545c; padding-left: 10px; margin-bottom: 16px; color: #a3a6aa;">
-    💀 <b>HEADSHOT</b>
-  </div>
-
-  <div style="margin-bottom: 16px;">
-    <div style="display: inline-block; width: 35%; vertical-align: top;">
-      <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">🔫 Weapon</div>
-      <span style="background-color: #1e1f22; padding: 4px 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">Heavy Sniper</span>
-    </div>
-    <div style="display: inline-block; width: 30%; vertical-align: top;">
-      <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">📏 Distance</div>
-      <span style="background-color: #1e1f22; padding: 4px 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">210m</span>
-    </div>
-    <div style="display: inline-block; width: 30%; vertical-align: top;">
-      <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">🎯 Headshot</div>
-      <span style="background-color: #1e1f22; padding: 4px 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">✓ Yes</span>
-    </div>
-  </div>
-
-  <div style="margin-bottom: 20px;">
-    <div style="margin-bottom: 6px; font-size: 0.9em; font-weight: 600; color: #ffffff;">🏆 Notable</div>
-    <div style="background-color: #1e1f22; padding: 8px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.9em;">
-      Long Range Kill — 210m
-    </div>
-  </div>
-
-  <div style="font-size: 0.75em; color: #949ba4; font-weight: 500;">
-    ❄️ Snowflake Killfeed • Snowflake Studios • 3/5/2026 9:20 PM
-  </div>
-</div>
+![Discord Webhook Logging](html/img/discord-webhook-preview.png)
 
 ### 🎨 In-Game Admin Settings Panel
 Type `/killfeedmenu` to open a full NUI settings panel — change killer/victim/theme/background colors with live color pickers, adjust vertical/horizontal position with sliders, tweak border radius, and preview changes in real-time. Saved to `theme.json` and synced to all connected players instantly. **Lite requires manual config.lua edits and a resource restart.**
