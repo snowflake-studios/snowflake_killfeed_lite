@@ -9,6 +9,12 @@
 [![Performance](https://img.shields.io/badge/resmon-0.00ms-00F0FC?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/license-free_to_use-green?style=for-the-badge)](#-license)
 
+<br>
+
+[![Snowflake Killfeed Lite Preview](https://dunb17ur4ymx4.cloudfront.net/packages/images/264fbd7b856920109128bd555eff869a80474689.png)](https://github.com/snowflake-studios/snowflake_killfeed_lite)
+
+<br>
+
 **A lightweight, event-driven killfeed notification system for FiveM.**
 Zero loops. Zero idle overhead. Plug and play.
 
@@ -252,7 +258,8 @@ snowflake_killfeed_lite/
 └── html/
     ├── index.html           -- NUI entry point
     ├── style.css            -- Killfeed card styles
-    └── script.js            -- NUI logic (vanilla JS)
+    ├── script.js            -- NUI logic (vanilla JS)
+    └── img/                 -- Assets (like webhook preview)
 ```
 
 ---
