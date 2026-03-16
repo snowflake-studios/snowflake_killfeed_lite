@@ -1,6 +1,6 @@
 // =============================================
 // Snowflake Studios - Killfeed NUI Script (Lite)
-// Free Edition | v1.0.2
+// Free Edition | v1.0.3
 // 0.00ms resmon | Vanilla JS | Event-Driven
 // =============================================
 

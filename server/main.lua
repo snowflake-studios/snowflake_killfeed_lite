@@ -1,6 +1,6 @@
 -- =============================================
 -- Snowflake Studios - Killfeed Server (Lite)
--- Free Edition | v1.0.2
+-- Free Edition | v1.0.3
 -- =============================================
 
 local ResourceName = GetCurrentResourceName()
@@ -457,6 +457,7 @@ end, true)
 -- Startup Message
 -- =============================================
 CreateThread(function()
-    print('^2[Snowflake Studios]^0 Killfeed Lite v1.0.2 loaded successfully')
+    print('^2[Snowflake Studios]^0 Killfeed Lite v1.0.3 loaded successfully')
+    print('^3[Snowflake Studios]^0 🔥 Upgrade to Premium for 104+ Weapon Icons, Headshots, Player Avatars, & Discord Webhooks: ^5https://snowflake-studios.tebex.io^0')
     debugPrint('^3[Snowflake Studios]^0 Commands: /killfeedtest')
 end)

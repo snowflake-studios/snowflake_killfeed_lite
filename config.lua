@@ -2,7 +2,7 @@ Config = Config or {}
 
 -- =============================================
 -- Snowflake Studios - Killfeed Lite Configuration
--- Free Edition | v1.0.2
+-- Free Edition | v1.0.3
 -- =============================================
 
 Config.DedupWindowMs = 250
@@ -18,6 +18,23 @@ Config.EnablePedKillTest = false
 -- =============================================
 Config.NameMode = 'character'
 Config.SteamApiKey = ''
+
+-- =============================================
+-- [💎 PREMIUM EXCLUSIVE FEATURES]
+-- These options are only available in Premium (v1.1.2+).
+-- Upgrade at: https://snowflake-studios.tebex.io
+-- =============================================
+-- Config.ServerName = 'My Server'        -- Discord embed footer name
+-- Config.RangeThreshold = 50             -- Distance (m) threshold to show in UI
+-- Config.ShowPlayerAvatar = true         -- Steam profile pictures in killfeed + Discord
+-- Config.DiscordWebhook = ''             -- Discord webhook URL for kill logging
+-- Config.DiscordFilters = {
+--     minDistance = 100,                  -- Min distance (m) to log
+--     headshotOnly = false,              -- Only log headshots
+--     playerOnly = false                 -- Only log PvP kills
+-- }
+-- Config.EnableRedzones = false          -- Restrict killfeed to PVP zones
+-- Config.RedzoneMode = 'config'          -- 'config' | 'sf_blockwars' | 'export'
 
 -- =============================================
 -- UI Color Customization

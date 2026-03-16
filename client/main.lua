@@ -1,6 +1,6 @@
 -- =============================================
 -- Snowflake Studios - Killfeed Client (Lite)
--- Free Edition | v1.0.2
+-- Free Edition | v1.0.3
 -- =============================================
 
 local ResourceName = GetCurrentResourceName()
