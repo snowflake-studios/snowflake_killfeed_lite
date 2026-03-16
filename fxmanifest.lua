@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Snowflake Studios'
 description 'Snowflake Killfeed Lite - Free Edition'
-version '1.0.2'
+version '1.0.3'
 
 -- Dependencies
 dependencies {

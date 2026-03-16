@@ -4,7 +4,7 @@
 
 ### Free Edition — Open Source & Unencrypted
 
-[![Version](https://img.shields.io/badge/version-1.0.2-blue?style=for-the-badge)](https://github.com/snowflake-studios/snowflake_killfeed_lite)
+[![Version](https://img.shields.io/badge/version-1.0.3-blue?style=for-the-badge)](https://github.com/snowflake-studios/snowflake_killfeed_lite)
 [![FiveM](https://img.shields.io/badge/FiveM-Ready-brightgreen?style=for-the-badge)](https://fivem.net/)
 [![Performance](https://img.shields.io/badge/resmon-0.00ms-00F0FC?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/license-free_to_use-green?style=for-the-badge)](#-license)
@@ -43,7 +43,7 @@ Zero loops. Zero idle overhead. Plug and play.
 
 ## 🌟 Killfeed Premium Showcase
 
-See the Premium version in action! Headshots, Steam avatars, actual weapon artwork, and advanced distance tracking:
+See the Premium version in action! Headshots, player avatars, actual weapon artwork, and advanced distance tracking:
 
 [![Killfeed Premium Showcase](https://img.youtube.com/vi/JMhNe24ayE8/maxresdefault.jpg)](https://youtu.be/JMhNe24ayE8)
 
@@ -66,17 +66,17 @@ Killfeed Lite is a solid foundation — but if you want the features that make y
 | **Weapon Icon Images (104+ .webp + custom)** | ❌ Generic icon | ✅ Per-weapon art |
 | **Headshot Detection** | ❌ | ✅ Early bone capture |
 | **Kill Distance Tracking** | ❌ | ✅ Server-side authoritative |
-| **Steam Profile Pictures in Feed** | ❌ | ✅ Killer + Victim avatars |
+| **Player Avatars (decoupled from name mode)** | ❌ | ✅ Killfeed + Discord embeds |
 | **Discord Webhook Kill Logging** | ❌ | ✅ Rich embeds w/ thumbnails |
-| **Discord Webhook Filters** | ❌ | ✅ Distance / Headshot / PvP |
+| **Discord Webhook Filters (AND-gated)** | ❌ | ✅ Distance / Headshot / PvP |
 | **In-Game Admin Settings Panel** (`/killfeedmenu`) | ❌ | ✅ Live color + layout editor |
+| **Runtime Name Mode + Avatar Toggle** | ❌ | ✅ Via dashboard, no restart |
 | **Redzone / PVP Zone Support** | ❌ | ✅ Config, blockwars, exports |
 | **Ped Kill Showcase Mode** | ❌ | ✅ Simulated names/avatars |
 | **Persistent Theme System** (`theme.json`) | ❌ | ✅ Survives restarts |
 | **Live Theme Sync to All Players** | ❌ | ✅ Instant broadcast |
 | **Batched Steam Avatar Prefetch** | ❌ | ✅ 100 IDs/request |
 | **Notable Kill Badges (Discord)** | ❌ | ✅ Long-range highlights |
-| **Enriched Kill Pipeline** | ❌ | ✅ Reliable at all ranges |
 | **Admin Commands** | 1 | 3 |
 | **Tebex Escrow Protection** | N/A | ✅ Available |
 | **Price** | Free | [From $14.99](https://snowflake-studios.tebex.io/) |
@@ -98,21 +98,21 @@ Perfect for creating promotional footage on solo test servers. Premium lets you 
 Premium uses **early bone capture** (bone 31086 / SKEL_Head) during the `CEventNetworkEntityDamage` event — before ragdoll or LOD can clear the data — giving you reliable headshot detection even at extreme range. A red crosshair icon marks headshot kills in the feed. **Lite has no headshot detection.**
 
 ### 📏 Kill Distance Tracking
-Every kill in Premium calculates distance **server-side** using authoritative `GetEntityCoords` — no client streaming inaccuracies. Kills above a configurable threshold (default 50m) display the distance right in the notification. **Lite does not track distance.**
+Every kill in Premium calculates distance **server-side** using authoritative `GetEntityCoords` — no client streaming inaccuracies. Kills above a configurable threshold (`Config.RangeThreshold`, default 50m) display the distance right in the notification. **Lite does not track distance.**
 
-### 👤 Steam Profile Pictures
-Premium renders **circular Steam profile pictures** for both killer and victim in the killfeed — with color-coded borders (cyan for killer, magenta for victim) and matching glow effects. Avatars are batched-prefetched on startup (100 IDs per Steam API call) and cached per-player on join, so they're ready before the first kill. **Lite has no avatar support.**
+### 👤 Player Avatars (`Config.ShowPlayerAvatar`)
+Premium renders **circular Steam profile pictures** for both killer and victim in the killfeed — with color-coded borders (cyan for killer, magenta for victim) and matching glow effects. In v1.1.2, **avatars are fully decoupled from name mode** — you can use `character` names from your framework while still showing Steam profile pictures. Avatars also appear as thumbnails on Discord webhook embeds. They are batched-prefetched on startup (100 IDs per Steam API call) and cached per-player on join, so they're always ready before the first kill. **Lite has no avatar support.**
 
 ### 📨 Discord Webhook Kill Logging
-Every kill can be logged to Discord as a **rich embed** with weapon, distance, headshot status, Steam avatar thumbnails, and color-coded styling (red for headshots, cyan otherwise). Configure **AND-gated filters** to only log what matters: minimum distance, headshot-only, or PvP-only. Lite has **zero Discord integration**.
+Every kill can be logged to Discord as a **rich embed** with weapon, distance, headshot status, player avatar thumbnails, and color-coded styling (red for headshots, cyan otherwise). Your `Config.ServerName` is shown in the embed footer. Configure **AND-gated filters** via `Config.DiscordFilters` to only log what matters: minimum distance, headshot-only, or PvP-only. Lite has **zero Discord integration**.
 
 ![Discord Webhook Logging](html/img/discord-webhook-preview.png)
 
 ### 🎨 In-Game Admin Settings Panel
 Type `/killfeedmenu` to open a full NUI settings panel — change killer/victim/theme/background colors with live color pickers, adjust vertical/horizontal position with sliders, tweak border radius, and preview changes in real-time. Saved to `theme.json` and synced to all connected players instantly. **Lite requires manual config.lua edits and a resource restart.**
 
-### 🔁 Live Theme Sync
-Change the theme once via the admin panel and every connected player sees the update **immediately** — no restart, no refresh. Theme persists across server restarts via `theme.json`.
+### 🔁 Live Settings & Theme Sync
+Change the theme, name mode, or avatar toggle at runtime via the admin panel — every connected player sees updates **immediately**. No restart, no refresh. Theme persists via `theme.json` and settings persist via `settings.json` across server restarts.
 
 ---
 
@@ -192,16 +192,16 @@ Config.Layout = {
 ```lua
 Config.NameMode = 'character'
 ```
-Auto-pulls character names from Qbox, QB-Core, or ESX.
+Auto-pulls character names from Qbox, QB-Core, or ESX. Falls back to the player's FiveM/Steam name if no framework is detected.
 
 **Steam Persona Names:**
 ```lua
 Config.NameMode = 'steam'
 Config.SteamApiKey = 'YOUR_STEAM_WEB_API_KEY_HERE'
 ```
-Get a key at [steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey).
+Get a key at [steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey). Falls back to character names → FiveM names if the Steam API is unavailable.
 
-> 💡 **Premium Tip:** The Premium version also displays **Steam profile pictures** alongside names in the killfeed when using Steam mode.
+> 💡 **Premium Tip:** In Premium v1.1.2, **player avatars are decoupled from name mode**. You can use `character` names from your framework while still displaying Steam profile pictures in the killfeed and Discord embeds via `Config.ShowPlayerAvatar`. Name mode and avatar toggle can also be changed at runtime via the admin dashboard — no restart needed.
 
 ### Testing Mode
 ```lua
@@ -239,7 +239,7 @@ exports.snowflake_killfeed_lite:AddKill('Officer John', 'Criminal Mike', 'Combat
 exports.snowflake_killfeed_lite:AddKill(source, targetId, 'Knife')
 ```
 
-> 💡 **Premium Tip:** The Premium export also accepts `isHeadshot` and `distance` parameters, auto-resolves Steam avatars for both players, and logs the kill to Discord.
+> 💡 **Premium Tip:** The Premium export also accepts `isHeadshot` and `distance` parameters, auto-resolves player avatars for both killer and victim (regardless of name mode), and logs the kill to Discord with rich embeds.
 
 ---
 
